@@ -1,3 +1,4 @@
+// setup token
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -5,6 +6,7 @@ $(document).ready(function () {
         },
     });
 });
+// khai báo biến cmtItem để lưu trữ comment hiện tại
 let cmtItem = [];
 loadInfo();
 function loadInfo(id = null, limit = 3, lenght = 0) {
@@ -20,6 +22,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
         dataType: "json",
         success: function (data) {
             console.log(data.info);
+            // kiểm tra có comment mới hay không
             if (cmtItem.length > data.info.comment.length) {
             } else {
                 $("#countCMT").empty();
@@ -30,10 +33,10 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                 $("#btn-more").empty();
                 $("#comment-post").empty();
 
-                // count cmt
+                // đếm số bình luận + trả lời bình luận
                 var countCMT = `${data.cmt.length + data.rep.length} bình luận`;
                 $("#countCMT").append(countCMT);
-                // title - description
+                // hiển thị title - description
                 var htmlTitle = `
             <div class="col-md-8 col-md-offset-2">
                         <h3 class="title">${data.info.title}</h3>
@@ -48,21 +51,21 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
             `;
                 $("#title-post").append(htmlTitle);
 
-                // content
+                // phần content
                 var htmlContent = `
             ${data.info.content}
 
             `;
                 $("#content-post").append(htmlContent);
 
-                // card author
+                // tên tác giả
                 var htmlAuthor = `
                 <h4 class="card-title">${data.info.user.name}</h4>
 
             `;
                 $("#card-author").append(htmlAuthor);
 
-                // comment
+                // nội dung bình luận
                 var max = 0;
                 data.cmt.forEach((comment) => {
                     var htmlComment = "";
@@ -95,7 +98,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                                         <i class="material-icons">reply</i> Phản hồi
                                     </a>
                                 </div>`;
-                    // rep comment
+                    // nội dung trả lời bình luận
                     data.rep.forEach((reply) => {
                         if (reply.ParentId === comment.id) {
                             htmlComment += `
@@ -120,7 +123,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                             </div>`;
                         }
                     });
-                    // form reply comment
+                    // form trả lời bình luận
                     htmlComment += `
                                 <div class="media media-post" id="reply-form-${comment.id}"
                                     style="display:none">
@@ -167,6 +170,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
 
                     $("#content-comment").append(htmlComment);
                 });
+                // khai báo biến btn để lấy id của button khi ấn submit để phân biệt form comment vs form reply
                 var btn = "";
                 var idComment = 0;
                 var limit = data.cmt.length + 3;
@@ -174,6 +178,9 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                 data.info.comment.forEach((el) => {
                     idComment = el.id;
                 });
+                // kiểm tra idComment lớn nhất trong db với mã idComment(max) hiện tại đang hiển thị có bằng nhau hay không
+                // nếu bằng thì hiển thị "chưa có bình luận mới"
+                // nếu lớn hơn nghĩa là vẫn còn bình luận chưa hiển thị nên sẽ hiển thị "xem thêm bình luận"
                 if (idComment === max) {
                     btn += `
                         Chưa có bình luận mới
@@ -229,7 +236,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                     `;
                 $("#comment-post").append(htmlCommentPost);
 
-                // show reply form
+                // show reply form, mỗi khi thẻ a được click thì sẽ thực hiện thay đổi trạng thái hiển thị reply form
 
                 $("a").on("click", function () {
                     $(
@@ -237,7 +244,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                     ).toggle();
                 });
 
-                // submit comment form
+                // submit comment form, đưa dữ liệu đến controller để xử lý và lưu trữ
                 $("button").on("click", function (e) {
                     e.preventDefault();
                     var idBtn = $(this).val();

@@ -41,58 +41,6 @@
                                         </h3>
                                     </div>
                                 </div>
-                                {{-- Phần chức năng tìm kiếm --}}
-                                {{-- <form action=""> --}}
-                                {{-- Chọn lớp muốn xem thông tin --}}
-                                {{-- <div class="row">
-                                        <div class="col-3" style="text-align: right">
-                                            Chọn lớp:
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select name="idClass" class="form-control">
-                                                <option style="text-align: center" value="">--------------------</option>
-                                                @foreach ($class as $class)
-                                                    <option style="text-align: center" value="{{ $class->idClass }}"
-                                                        @if ($class->idClass == $idClass) {{ 'selected' }} @endif>
-                                                        {{ $class->nameClass }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-3" style="text-align: right">
-                                            Hoặc
-                                        </div>
-                                    </div>
-                                    <br> --}}
-                                {{-- Chọn giảng viên muốn xem thông tin --}}
-                                {{-- <div class="row">
-                                        <div class="col-3" style="text-align: right">
-                                            Chọn giảng viên:
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select name="idTeacher" class="form-control">
-                                                <option style="text-align: center" value="">--------------------</option>
-                                                @foreach ($teacher as $teacher)
-                                                    <option style="text-align: center" value="{{ $teacher->idTeacher }}"
-                                                        @if ($teacher->idTeacher == $idTeacher) {{ 'selected' }} @endif>
-                                                        {{ $teacher->lastName }} {{ $teacher->middleName }}
-                                                        {{ $teacher->firstName }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <br> --}}
-                                {{-- Chọn giảng viên muốn xem thông tin --}}
-
-                                {{-- <br>
-                                    <button class="btn btn-primary" style="margin:auto; display:block">Okkkkkkk</button>
-                                </form> --}}
-                                {{-- <br> --}}
                             </div>
 
                             <!-- /.card-header -->

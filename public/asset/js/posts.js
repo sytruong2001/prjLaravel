@@ -36,29 +36,40 @@ function load_data(page = 1) {
             });
             var current_page = data.paginate.current_page;
             var last_page = data.paginate.current_page;
+            var paginator = "";
+            paginator += `
+                    <a href="javascript:void(0);" onclick="paginate(${
+                        data.paginate.current_page - 1
+                    }, ${data.paginate.last_page})">
+                    &laquo; Previous
+                    </a>
+                `;
             data.paginate.links.forEach((paginate) => {
                 if (isNaN(paginate.label)) {
                 } else {
-                    var paginate = `
-                    <a onclick="paginate(${paginate.label}, ${current_page}, ${last_page})">
+                    paginator += `
+                    <a href="javascript:void(0);" onclick="paginate(${paginate.label})">
                     ${paginate.label}
                     </a>
                     `;
                 }
-
-                $("#paginate").append(paginate);
             });
+            paginator += `
+                    <a href="javascript:void(0);" onclick="paginate(${
+                        data.paginate.current_page + 1
+                    }, ${data.paginate.last_page})">
+                    Next &raquo;
+                    </a>
+                `;
+            $("#paginate").append(paginator);
         },
     });
 }
-function paginate(page, current_page, last_page) {
-    console.log(page);
-    if (page == "&laquo; Previous") {
-        if (current_page > 1) page = current_page - 1;
-        load_data(page);
-    } else if (page == "Next &raquo;") {
-        if (current_page < last_page) page = current_page + 1;
-        load_data(page);
+function paginate(page, last_page) {
+    if (page > last_page) {
+        load_data(last_page);
+    } else if (page < 1) {
+        load_data(1);
     } else {
         load_data(page);
     }

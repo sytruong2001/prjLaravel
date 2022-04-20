@@ -10,7 +10,6 @@
 
                 </div>
                 <div class="row" id="paginate" style="text-align: center">
-                    {{-- {{ $posts->links() }} --}}
                 </div>
             </div>
         </div>
