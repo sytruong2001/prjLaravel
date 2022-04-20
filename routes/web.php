@@ -33,7 +33,7 @@ Route::get('/getDetailPost', [DetailPostController::class, 'getDetailPost'])->na
 Route::middleware(['auth', 'role:User'])->name('User.')->prefix("User")->group(function () {
 
     Route::get('/', [PostController::class, 'indexUser'])->name('home-user');
-    Route::post('/comment', [CommentController::class, 'comment'])->name('comment');
+    Route::post('/comment/{lenght}', [CommentController::class, 'comment'])->name('comment');
 });
 
 

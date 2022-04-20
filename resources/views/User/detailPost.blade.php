@@ -39,6 +39,9 @@
                     </div>
                 </div>
             </div>
+            {{-- comment space --}}
+
+            {{-- @yield('comment') --}}
             <div class="section section-comments">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
@@ -52,7 +55,6 @@
                     <div id="content-comment" class="col-md-8 col-md-offset-2">
                     </div>
                     <div id="btn-more" class="col-md-8 col-md-offset-2" style="text-align: center">
-                        Hiển thị thêm bình luận
                     </div>
                     <div class="col-md-8 col-md-offset-2">
                         <div class="media media-post" id="comment-post">
@@ -60,6 +62,7 @@
                     </div>
                 </div>
             </div>
+            {{-- end comment space --}}
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

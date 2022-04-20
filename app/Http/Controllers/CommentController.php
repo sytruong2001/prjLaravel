@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function comment(Request $request)
+    public function comment(Request $request, $lenght)
     {
         $UserId = Auth::user()->id;
         if ($UserId != null) {
@@ -35,6 +35,7 @@ class CommentController extends Controller
             $json['code'] = 200;
             $json['limit'] = $limit;
             $json['id'] = $idMax;
+            $json['lenghtId'] = $lenght;
             echo json_encode($json);
         } else {
             $json['msg'] = "Chưa đăng nhập";

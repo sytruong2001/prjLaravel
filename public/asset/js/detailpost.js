@@ -7,14 +7,20 @@ $(document).ready(function () {
 });
 let cmtItem = [];
 loadInfo();
-function loadInfo(id = null, limit = 3) {
+function loadInfo(id = null, limit = 3, lenght = 0) {
     $.ajax({
         url: "/getDetailPost",
         type: "get",
-        data: { slug: window.location.pathname, id: id, limit: limit },
+        data: {
+            slug: window.location.pathname,
+            id: id,
+            limit: limit,
+            lenght: lenght,
+        },
         dataType: "json",
         success: function (data) {
-            if (cmtItem.length == data.info.comment) {
+            console.log(data.info);
+            if (cmtItem.length > data.info.comment.length) {
             } else {
                 $("#countCMT").empty();
                 $("#title-post").empty();
@@ -86,7 +92,7 @@ function loadInfo(id = null, limit = 3) {
                     htmlComment += `<div class="media-footer">
                                     <a id="reply" class="btn btn-primary btn-simple pull-right"
                                         data-id="${comment.id}" rel="tooltip" title="Reply to Comment">
-                                        <i class="material-icons">reply</i> Reply
+                                        <i class="material-icons">reply</i> Phản hồi
                                     </a>
                                 </div>`;
                     // rep comment
@@ -237,7 +243,7 @@ function loadInfo(id = null, limit = 3) {
                     var idBtn = $(this).val();
                     debugger;
                     $.ajax({
-                        url: "/User/comment",
+                        url: "/User/comment/" + max,
                         method: "post",
                         dataType: "json",
                         async: false,
@@ -245,7 +251,11 @@ function loadInfo(id = null, limit = 3) {
                         success: function (response) {
                             if (response.code == 200) {
                                 $("#frm" + idBtn)[0].reset();
-                                loadInfo(response.id - 1, response.limit);
+                                loadInfo(
+                                    response.id - 1,
+                                    response.limit,
+                                    response.lenghtId
+                                );
                             }
                         },
                         error: function () {
@@ -256,12 +266,11 @@ function loadInfo(id = null, limit = 3) {
             }
         },
     });
-    // };
 }
 
 function show_more(id, limit) {
     $("#showMore").on("click", function () {
         $("#showMore").html("Loading.......");
-        loadInfo(id, limit);
+        loadInfo(id, limit, 0);
     });
 }

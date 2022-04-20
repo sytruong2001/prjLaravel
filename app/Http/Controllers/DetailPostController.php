@@ -24,6 +24,7 @@ class DetailPostController extends Controller
         $slug = substr($request->get('slug'), 6);
         $id = $request->get('id');
         $limit = $request->get('limit');
+        $lenght = $request->get('lenght');
         if ($slug != null) {
             $info = PostModel::query()
                 ->with(
@@ -38,6 +39,12 @@ class DetailPostController extends Controller
             Carbon::setLocale('vi');
             $now = Carbon::now();
             if ($id != null) {
+                $count = CommentModel::query()
+                    ->join('post', 'comment.PostId', '=', 'post.id')
+                    ->where('post.slug', $slug)
+                    ->where('comment.ParentId', null)
+                    ->where('comment.id', '<=', $lenght)
+                    ->count();
                 foreach ($info->comment as $check) {
                     if ($id < $check->id) {
                         $comment = CommentModel::query()
@@ -46,6 +53,14 @@ class DetailPostController extends Controller
                             ->where('comment.ParentId', null)
                             ->select('comment.*')
                             ->limit($limit)
+                            ->get();
+                    } else {
+                        $comment = CommentModel::query()
+                            ->join('post', 'comment.PostId', '=', 'post.id')
+                            ->where('post.slug', $slug)
+                            ->where('comment.ParentId', null)
+                            ->select('comment.*')
+                            ->limit($count)
                             ->get();
                     }
                 }

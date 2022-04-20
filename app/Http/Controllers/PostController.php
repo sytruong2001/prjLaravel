@@ -26,10 +26,17 @@ class PostController extends Controller
         return view('User.posts');
     }
 
-    public function getInfoPost()
+    public function getInfoPost(Request $request)
     {
-        $post = DB::table('post')->paginate(3);
-        echo json_encode($post);
+        $current_page = $request->get('page') ? $request->get('page') : 1;
+        $limit = 3;
+        $paginate = DB::table('post')
+            ->paginate($limit);
+        $post = DB::table('post')
+            ->limit($limit)->offset(($current_page - 1) * $limit)->get();
+        $json['post'] = $post;
+        $json['paginate'] = $paginate;
+        echo json_encode($json);
     }
 
     public function create()
