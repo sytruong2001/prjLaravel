@@ -34,13 +34,12 @@ function load_data(page = 1) {
                     `;
                 $("#content-post").append(html);
             });
-            var current_page = data.paginate.current_page;
-            var last_page = data.paginate.current_page;
+            var last_page = data.paginate.last_page;
             var paginator = "";
             paginator += `
                     <a href="javascript:void(0);" onclick="paginate(${
                         data.paginate.current_page - 1
-                    }, ${data.paginate.last_page})">
+                    }, ${last_page})">
                     &laquo; Previous
                     </a>
                 `;
@@ -57,7 +56,7 @@ function load_data(page = 1) {
             paginator += `
                     <a href="javascript:void(0);" onclick="paginate(${
                         data.paginate.current_page + 1
-                    }, ${data.paginate.last_page})">
+                    }, ${last_page})">
                     Next &raquo;
                     </a>
                 `;
