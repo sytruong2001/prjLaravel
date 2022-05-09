@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Spatie\Permission\PermissionServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class, //cho provider
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
 
     ],
 
@@ -232,6 +234,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class, //cho alias
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
+
     ],
 
 ];

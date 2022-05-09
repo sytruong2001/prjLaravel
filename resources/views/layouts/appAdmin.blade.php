@@ -163,6 +163,7 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="asset/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="asset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

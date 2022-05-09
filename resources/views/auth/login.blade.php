@@ -52,6 +52,13 @@
                 <x-button class="ml-3">
                     {{ __('Đăng nhập') }}
                 </x-button>
+
+            </div>
+            <div class="flex items-center justify-center mt-4">
+                <a href="/login-facebook">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNyAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgICA8cGF0aCBkPSJNMTcgMTAuNzY5MkgxMS4zMzMzVjYuNDYxNTRDMTEuMzMzMyA1LjI3MjYyIDEyLjM0ODggNS4zODQ2MiAxMy42IDUuMzg0NjJIMTUuODY2N1YwSDExLjMzMzNDNy41Nzc0NyAwIDQuNTMzMzMgMi44OTI2MiA0LjUzMzMzIDYuNDYxNTRWMTAuNzY5MkgwVjE2LjE1MzhINC41MzMzM1YyOEgxMS4zMzMzVjE2LjE1MzhIMTQuNzMzM0wxNyAxMC43NjkyWiIgZmlsbD0iIzE5NzZEMiIvPg0KPC9zdmc+DQo="
+                        alt="Facebook">
+                </a>
             </div>
         </form>
     </x-auth-card>

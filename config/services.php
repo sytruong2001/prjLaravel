@@ -29,5 +29,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'facebook' => [
+        'client_id' => '1297310744127615', //client face của bạn
+        'client_secret' => '797fbe8c1b6aa506fa18ef0f284e6d89', //client app service face của bạn
+        'redirect' => 'https://prjlaravel.local/user/callback' //callback trả về
+    ],
 
 ];

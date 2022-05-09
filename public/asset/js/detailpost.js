@@ -248,7 +248,7 @@ function loadInfo(id = null, limit = 3, lenght = 0) {
                 $("button").on("click", function (e) {
                     e.preventDefault();
                     var idBtn = $(this).val();
-                    debugger;
+                    // debugger;
                     $.ajax({
                         url: "/User/comment/" + max,
                         method: "post",

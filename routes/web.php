@@ -11,6 +11,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\LoginFacebookController;
+use App\Http\Controllers\TelegramController;
 
 
 /*
@@ -24,11 +26,16 @@ use Spatie\Permission\Models\Role;
 |
 */
 
+Route::get('/updated-activity', [TelegramController::class, 'updatedActivity']);
+// Route::get('/contact', [TelegramController::class, 'contactForm']);
+Route::post('/send-message', [TelegramController::class, 'check_otp']);
+Route::get('/check-otp', [TelegramController::class, 'veritifyForm']);
+
+
 Route::get('/', [PostController::class, 'indexUser'])->name('home-user');
 Route::get('/slug/{slug}', [DetailPostController::class, 'index'])->name('detail');
 Route::get('/getInfo', [PostController::class, 'getInfoPost'])->name('infoPost');
 Route::get('/getDetailPost', [DetailPostController::class, 'getDetailPost'])->name('detailPost');
-
 // Chức năng dành cho user
 Route::middleware(['auth', 'role:User'])->name('User.')->prefix("User")->group(function () {
 
@@ -39,7 +46,6 @@ Route::middleware(['auth', 'role:User'])->name('User.')->prefix("User")->group(f
 
 // Chức năng dành cho admin
 Route::middleware(['auth', 'role:Admin'])->name('Admin.')->prefix("Admin")->group(function () {
-
     Route::get('/', [PostController::class, 'index'])->name('post');
     Route::get('/add-post', [PostController::class, 'create'])->name('create');
     Route::post('/add-post/store', [PostController::class, 'store'])->name('store');
@@ -60,7 +66,9 @@ Route::middleware(['auth', 'role:Super Admin'])->name('Super-Admin.')->prefix("S
     Route::delete('/delete/{id}', [AdminController::class, 'destroy'])->name('delete');
 });
 
-
+//Login facebook
+Route::get('/login-facebook', [LoginFacebookController::class, 'login_facebook']);
+Route::get('/user/callback', [LoginFacebookController::class, 'callback_facebook']);
 //thao tác với sản phẩm
 // Route::resource('/product', ProdController::class);
 // Route::prefix("product")->name('product.')->group(function () {
